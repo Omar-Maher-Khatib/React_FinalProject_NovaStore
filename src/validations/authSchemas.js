@@ -30,3 +30,7 @@ export const loginSchema = yup.object({
     .matches(/[0-9]/,"Password must contain a number")
 
 })
+
+export const sendCodeSchema = yup.object({
+    email:yup.string().required("Email Is Required").email("Invalid Email Format"),
+})

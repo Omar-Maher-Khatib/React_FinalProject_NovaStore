@@ -4,6 +4,8 @@ import AuthLayout from "./layouts/AuthLayout";
 import Home from "./assets/home/Home";
 import Login from "./assets/login/Login";
 import Register from "./assets/register/Register";
+import SendCode from "./assets/sendcode/SendCode";
+import ResetPassword from "./assets/resetpassword/ResetPassword";
 
 const router = createBrowserRouter([
   {
@@ -26,6 +28,14 @@ const router = createBrowserRouter([
         {
             path: "/register",
             element: <Register />
+        },
+        {
+            path: "/sendcode",
+            element: <SendCode />
+        },
+        {
+            path: "/resetpassword",
+            element: <ResetPassword />
         },
     ]
   }
