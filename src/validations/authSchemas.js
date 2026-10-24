@@ -34,3 +34,18 @@ export const loginSchema = yup.object({
 export const sendCodeSchema = yup.object({
     email:yup.string().required("Email Is Required").email("Invalid Email Format"),
 })
+
+export const resetPasswordSchema = yup.object({
+    password:yup. string().required("password is required")
+    .min(6, "password must be at least 6 char")
+    .matches(/[A-Z]/, "Password must contain an uppercase letter")
+    .matches(/[a-z]/, "Password must contain an lowercase letter")
+    .matches(/[0-9]/,"Password must contain a number"),
+
+    confirmPassword:yup.string().oneOf([yup.ref('password'), null], 'Passwords must match')
+})
+
+export const otpSchema = yup.object({
+    otp:yup.string().required("OTP is required")
+    .matches(/^\d{4}$/, "OTP must be a 4-digit number")
+})
