@@ -16,21 +16,24 @@ export default function ResetPassword() {
 
   const navigate = useNavigate();
   const [serverError, setServerError] = useState(null);
-  const [success, setSuccess] = useState(false);
 
   const { register, handleSubmit ,formState: { errors,isSubmitting } } = useForm({
     resolver: yupResolver(resetPasswordSchema),mode: "onBlur"
   })
 
   const onSubmit = async (data) => {
-    console.log(data);
+    setServerError(null);
     try {
-      const response = await axios.post('https://knowledgeshop.runasp.net/api/auth/Account/ResetPassword', data);
-      setSuccess(true);
+      const { email, code, newPassword } = data;
+      await axios.patch('https://knowledgeshop.runasp.net/api/auth/Account/ResetPassword', {
+        Email: email,
+        Code: code,
+        NewPassword: newPassword
+      });
       navigate('/login');
     }catch(e){
       console.log(e.response);
-      setServerError(e.response.data.message);
+      setServerError(e.response?.data?.message || 'Unable to reset password. Please try again.');
     }
   }
 
@@ -44,9 +47,19 @@ return (
         {serverError?<Alert severity="error">{serverError}</Alert>:null}
          
         <Box component={'form'} onSubmit={handleSubmit((onSubmit))}>
-          <TextField label="Password" fullWidth margin='normal' {...register('password')}
-            error={errors.password}
-            helperText={errors.password?.message}
+          <TextField label="Email" fullWidth margin='normal' {...register('email')}
+            error={errors.email}
+            helperText={errors.email?.message}
+          >
+          </TextField>
+          <TextField label="Code" fullWidth margin='normal' {...register('code')}
+            error={!!errors.code}
+            helperText={errors.code?.message}
+          >
+          </TextField>
+          <TextField label="Password" fullWidth margin='normal' {...register('newPassword')}
+            error={!!errors.newPassword}
+            helperText={errors.newPassword?.message}
             type="password"> 
           </TextField>
           <TextField label="Confirm Password" fullWidth margin='normal' {...register('confirmPassword')}

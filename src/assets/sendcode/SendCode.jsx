@@ -27,7 +27,7 @@ export default function SendCode() {
     try {
       const response = await axios.post('https://knowledgeshop.runasp.net/api/auth/Account/SendCode', data);
       setSuccess(true);
-      navigate('/otp');
+      navigate('/resetpassword');
     }catch(e){
       console.log(e.response);
       setServerError(e.response.data.message);
@@ -54,7 +54,7 @@ return (
             {isSubmitting?"...Loading":"Send Code"}
           </Button>
           <Typography variant='body2' sx={{textAlign: 'center',mt:2}}>
-          <Link to='/Login'>Back to Login</Link>
+          <Link to='/login'>Back to Login</Link>
           </Typography>
         </Box>
       </Box>

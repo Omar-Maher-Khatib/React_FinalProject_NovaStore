@@ -8,7 +8,7 @@ export const registerSchema = yup.object({
     .min(3, "User Name must be at least 3 char"),
 
     email:yup.string().required("Email Is Required").email("Invalid Email Format"),
-    
+
     password:yup. string().required("password is required")
     .min(6, "password must be at least 6 char")
     .matches(/[A-Z]/, "Password must contain an uppercase letter")
@@ -36,16 +36,15 @@ export const sendCodeSchema = yup.object({
 })
 
 export const resetPasswordSchema = yup.object({
-    password:yup. string().required("password is required")
+    email:yup.string().required("Email Is Required").email("Invalid Email Format"),
+    code:yup.string().required("Code is required"),
+
+    newPassword:yup. string().required("password is required")
     .min(6, "password must be at least 6 char")
     .matches(/[A-Z]/, "Password must contain an uppercase letter")
     .matches(/[a-z]/, "Password must contain an lowercase letter")
     .matches(/[0-9]/,"Password must contain a number"),
 
-    confirmPassword:yup.string().oneOf([yup.ref('password'), null], 'Passwords must match')
-})
-
-export const otpSchema = yup.object({
-    otp:yup.string().required("OTP is required")
-    .matches(/^\d{4}$/, "OTP must be a 4-digit number")
+    confirmPassword:yup.string().required("Confirm password is required")
+    .oneOf([yup.ref('newPassword')], 'Passwords must match')
 })

@@ -6,7 +6,6 @@ import Login from "./assets/login/Login";
 import Register from "./assets/register/Register";
 import SendCode from "./assets/sendcode/SendCode";
 import ResetPassword from "./assets/resetpassword/ResetPassword";
-import Otp from "./assets/otp/Otp";
 
 const router = createBrowserRouter([
   {
@@ -42,10 +41,6 @@ const router = createBrowserRouter([
             path: "/resetpassword",
             element: <ResetPassword />
         },
-        {
-            path: "/otp",
-            element: <Otp />
-        }
     ]
   }
 ]);
