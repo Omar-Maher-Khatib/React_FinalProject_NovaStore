@@ -61,6 +61,10 @@ return (
           <Typography variant='body2' sx={{textAlign: 'center',mt:2}}>Don't have an account?
           <Link to='/register'>Register</Link>
           </Typography>
+          <Typography variant='body2' sx={{textAlign: 'center',mt:2}}>
+            Forgot your password?
+            <Link to='/sendcode'>Reset Password</Link>
+          </Typography>
         </Box>
       </Box>
     </Container>
